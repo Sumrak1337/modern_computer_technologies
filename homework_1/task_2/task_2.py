@@ -1,5 +1,6 @@
 import networkx as nx
 import matplotlib.pyplot as plt
+import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 
 from homework_1.abstract_task import AbstractTask
@@ -27,9 +28,33 @@ class Task2(AbstractTask):
         self.get_top_10(self.betweenness_centrality, 'Betweenness Centrality')
         self.get_top_10(self.eigenvector_centrality, 'Eigenvector Centrality')
 
-        # adj_matrix = nx.adjacency_matrix(self.G)
         adj_matrix = nx.to_scipy_sparse_array(self.G)
         self.cosine_similarity = cosine_similarity(adj_matrix)
+        cs = self.cosine_similarity.copy()
+        n = len(cs)
+        for i in range(n):
+            for j in range(n):
+                if i <= j:
+                    cs[i, j] = 0.
+        print('Cosine Similarity:')
+        res_cs = []
+        for i in range(10):
+            xmax, ymax = np.where(cs == cs.max())
+            for x, y in zip(xmax, ymax):
+                res_cs.append((x, y))
+                if len(res_cs) >= 10:
+                    break
+            if len(res_cs) >= 10:
+                break
+            cs[xmax, ymax] = 0.
+
+        for node in res_cs:
+            x, y = node
+            x_name = list(nx.nodes(self.G))[x]
+            y_name = list(nx.nodes(self.G))[y]
+
+            print(f'{x_name:15} + {y_name:20}: {self.cosine_similarity[x, y]:.3f}')
+
         plt.matshow(self.cosine_similarity)
         title = 'Cosine Similarity'
         plt.title(title)
@@ -54,11 +79,7 @@ class Task2(AbstractTask):
         plt.savefig(RESULT_ROOT / f'{tag} distr.png')
         plt.close('all')
 
-    def report(self):
-        ...
-
 
 G = nx.read_gml(TASK_ROOT / 'graphs' / 'netscience.gml')
 task2 = Task2(G)
 task2.run()
-task2.report()

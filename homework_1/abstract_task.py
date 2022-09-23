@@ -8,18 +8,6 @@ class AbstractTask:
     def run(self):
         raise NotImplementedError
 
-    def report(self):
-        if None in self.get_values():
-            msg = 'Some features are None. Use an implemented .run() to get values for it.'
-            raise TypeError(f'{msg}')
-        for feature in self.get_features():
-            v = getattr(self, feature)
-            s = f'{feature}'
-            if isinstance(v, float):
-                print(f'{s:40}: {v:.3f}')
-            else:
-                print(f'{s:40}: {v}')
-
     def get_features(self):
         features = []
         for k, v in self.__dict__.items():
