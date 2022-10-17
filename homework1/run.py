@@ -1,9 +1,9 @@
 import networkx as nx
 
 from defaults import GRAPH_ROOT
-from task_1.task_1 import Task1
-from task_2.task_2 import Task2
-from task_3.task_3 import Task3
+from tasks.task1 import Task1
+from tasks.task2 import Task2
+from tasks.task3 import Task3
 
 # TODO: add logging
 
