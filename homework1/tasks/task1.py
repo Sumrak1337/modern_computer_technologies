@@ -58,7 +58,7 @@ class Task1(AbstractTask):
         plt.savefig(RESULT_ROOT / 'degree_distr.png')
 
     def _print_params(self):
-        for feature in self.get_features():
+        for feature in self._get_features():
             v = getattr(self, feature)
             s = f'{feature}'
             if isinstance(v, float):
