@@ -1,6 +1,6 @@
 import networkx as nx
 
-from homework_1.abstract_task import AbstractTask
+from homework1.abstract_task import AbstractTask
 
 
 class Task3(AbstractTask):

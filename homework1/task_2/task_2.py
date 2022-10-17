@@ -3,8 +3,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 
-from homework_1.abstract_task import AbstractTask
-from homework_1.defaults import RESULT_ROOT
+from homework1.abstract_task import AbstractTask
+from homework1.defaults import RESULT_ROOT
 
 
 class Task2(AbstractTask):

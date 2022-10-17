@@ -2,8 +2,8 @@ import networkx as nx
 import numpy as np
 import matplotlib.pyplot as plt
 
-from homework_1.abstract_task import AbstractTask
-from homework_1.defaults import RESULT_ROOT
+from homework1.abstract_task import AbstractTask
+from homework1.defaults import RESULT_ROOT
 
 
 class Task1(AbstractTask):
