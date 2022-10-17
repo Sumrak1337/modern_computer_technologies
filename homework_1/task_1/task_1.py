@@ -3,10 +3,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from homework_1.abstract_task import AbstractTask
-from homework_1.defaults import TASK_ROOT, RESULT_ROOT
+from homework_1.defaults import RESULT_ROOT
 
 
 class Task1(AbstractTask):
+    prefix = 'task1'
+
     def __init__(self, graph: nx.Graph):
         super().__init__(graph=graph)
 
@@ -42,8 +44,6 @@ class Task1(AbstractTask):
         self.diameter_in_largest_connectivity = nx.diameter(graph_largest_cc)
         self.dist_90 = 0  # TODO: ask about it
 
-        self.report()
-
     def get_hist(self):
         plt.figure()
         degree_seq = [degree[1] for degree in nx.degree(self.G)]
@@ -54,20 +54,3 @@ class Task1(AbstractTask):
         plt.ylabel("Number of nodes")
         plt.tight_layout()
         plt.savefig(RESULT_ROOT / 'degree_distr.png')
-
-    def report(self):
-        # if None in self.get_values():
-        #     msg = 'Some features are None. Use an implemented .run() to get values for it.'
-        #     raise TypeError(f'{msg}')
-        for feature in self.get_features():
-            v = getattr(self, feature)
-            s = f'{feature}'
-            if isinstance(v, float):
-                print(f'{s:40}: {v:.3f}')
-            else:
-                print(f'{s:40}: {v}')
-
-
-G = nx.read_gml(TASK_ROOT / 'graphs' / 'netscience.gml')
-task = Task1(G)
-task.run()

@@ -4,10 +4,12 @@ import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 
 from homework_1.abstract_task import AbstractTask
-from homework_1.defaults import TASK_ROOT, RESULT_ROOT
+from homework_1.defaults import RESULT_ROOT
 
 
 class Task2(AbstractTask):
+    prefix = 'task2'
+
     def __init__(self, graph: nx.Graph):
         super().__init__(graph=graph)
 
@@ -78,8 +80,3 @@ class Task2(AbstractTask):
         plt.hist(values, bins=10, range=(min(values), max(values)), rwidth=0.95)
         plt.savefig(RESULT_ROOT / f'{tag} distr.png')
         plt.close('all')
-
-
-G = nx.read_gml(TASK_ROOT / 'graphs' / 'netscience.gml')
-task2 = Task2(G)
-task2.run()

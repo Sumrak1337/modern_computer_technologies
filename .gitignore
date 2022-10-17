@@ -1,2 +1,7 @@
 /.idea/
 __pycache__
+**.aux
+*.pdf
+*.log
+*.gz
+!report.pdf
