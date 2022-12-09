@@ -1,0 +1,13 @@
+# node node weight
+a d 3
+b f 5
+b g 5
+b h 10
+c d 9
+c e 4
+c g 5
+c h 7
+d e 8
+d h 6
+f g 9
+f h 8
