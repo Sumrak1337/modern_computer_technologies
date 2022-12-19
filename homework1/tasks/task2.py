@@ -7,11 +7,12 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 from logger import get_logger
 from homework1.task_defaults import DATA_ROOT, RESULT_ROOT
+from homework1.tasks.abstract_task import AbstractTask
 
 log = get_logger(__name__)
 
 
-class Task2:
+class Task2(AbstractTask):
     prefix = 'task2'
 
     def __init__(self):
@@ -68,23 +69,12 @@ class Task2:
 
         # Consider only upper triangular part of matrix
         cs_triu = np.triu(cs, 1)
+
         res_cs = self.get_cs(cs_triu)
 
         # The first 10 pairs with the highest cosine similarity
         log.info('Cosine Similarity:')
-        for node in res_cs[:10]:
-            x, y = node
-            x_name = list(nx.nodes(self.g))[x]
-            y_name = list(nx.nodes(self.g))[y]
-
-            print(f'{x_name:25} + {y_name:25}: {cs[x, y]:.3f}')
-
-    @staticmethod
-    def to_undirected(graph):
-        g = nx.Graph()
-        for edge in nx.edges(graph):
-            g.add_edge(*edge)
-        return g
+        self.print_cosine_similarity(self.g, cs, res_cs)
 
     @staticmethod
     def get_top_10(metric, tag):
@@ -104,13 +94,3 @@ class Task2:
         plt.hist(values, bins=10, range=(min(values), max(values)), rwidth=0.95)
         plt.savefig(RESULT_ROOT / f'{tag}_distr.png')
         plt.close('all')
-
-    @staticmethod
-    def get_cs(cs_triu):
-        res = []
-        for i in range(len(cs_triu)):
-            x_max, y_max = np.where(cs_triu == cs_triu.max())
-            for x, y in zip(x_max, y_max):
-                res.append((x, y))
-            cs_triu[x_max, y_max] = 0.
-        return res
