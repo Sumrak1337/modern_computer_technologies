@@ -3,7 +3,8 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-from homework2.task_defaults import DATA_ROOT, get_logger
+from logger import get_logger
+from homework2.task_defaults import DATA_ROOT
 from homework2.tasks.task_assigment import TaskAssigment
 
 log = get_logger(__file__)
@@ -30,7 +31,6 @@ class Task1:
 
             self.plot_from_matrix(main_matrix, bsm_h, i)
 
-            # TODO: add time
             log.info(f"\nCost matrix: "
                      f"\n{main_matrix}")
 
@@ -66,10 +66,18 @@ class Task1:
 
         plt.figure()
         plt.title(f"Var{index} full graph + solution")
-        nx.draw_networkx_nodes(main_graph, pos=pos)
-        nx.draw_networkx_edges(main_graph, pos=pos, edge_color='red', edgelist=nx.edges(solution_graph))
-        nx.draw_networkx_edges(main_graph, pos=pos, edge_color='black', edgelist=special_edgelist)
-        nx.draw_networkx_labels(main_graph, pos=pos)
+        nx.draw_networkx_nodes(main_graph,
+                               pos=pos)
+        nx.draw_networkx_edges(main_graph,
+                               pos=pos,
+                               edge_color='red',
+                               edgelist=nx.edges(solution_graph))
+        nx.draw_networkx_edges(main_graph,
+                               pos=pos,
+                               edge_color='black',
+                               edgelist=special_edgelist)
+        nx.draw_networkx_labels(main_graph,
+                                pos=pos)
         nx.draw_networkx_edge_labels(main_graph, pos=pos, edge_labels=labels, label_pos=0.83, font_size=6)
         plt.tight_layout()
         plt.show()

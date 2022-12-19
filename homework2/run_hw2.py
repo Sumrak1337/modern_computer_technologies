@@ -11,14 +11,6 @@ def main():
     ]:
         Task().run()
 
-    # g = nx.Graph()
-    # g.add_edge('a', 'b')
-    # g.add_edge('d', 'c')
-    # nx.draw(g, pos=nx.bipartite_layout(g, ['a', 'c']))
-    # plt.show()
-    # task = Task()
-    # task.run()
-
 
 if __name__ == '__main__':
     main()
