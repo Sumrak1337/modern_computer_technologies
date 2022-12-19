@@ -15,7 +15,7 @@ class Task2:
     prefix = 'task2'
 
     def __init__(self):
-        self.g = nx.to_undirected(nx.read_gexf(DATA_ROOT / 'vk_friends_graph.gexf'))
+        self.g = self.to_undirected(nx.read_gexf(DATA_ROOT / 'vk_friends_graph.gexf'))
 
     def run(self):
         lcc = max(nx.connected_components(self.g), key=len)
@@ -78,6 +78,13 @@ class Task2:
             y_name = list(nx.nodes(self.g))[y]
 
             print(f'{x_name:25} + {y_name:25}: {cs[x, y]:.3f}')
+
+    @staticmethod
+    def to_undirected(graph):
+        g = nx.Graph()
+        for edge in nx.edges(graph):
+            g.add_edge(*edge)
+        return g
 
     @staticmethod
     def get_top_10(metric, tag):
