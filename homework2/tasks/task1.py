@@ -4,10 +4,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from logger import get_logger
-from homework2.task_defaults import DATA_ROOT
+from homework2.task_defaults import DATA_ROOT, RESULTS_ROOT
 from homework2.tasks.task_assigment import TaskAssigment
 
-log = get_logger(__file__)
+log = get_logger(__name__)
 
 
 class Task1:
@@ -15,6 +15,7 @@ class Task1:
 
     def run(self):
         for i in range(1, 3):
+            log.info(f'Var{i}')
             main_matrix = pd.read_csv(DATA_ROOT / f'var{i}.csv', sep=',', header=None).to_numpy()
             ta = TaskAssigment(main_matrix)
 
@@ -80,4 +81,4 @@ class Task1:
                                 pos=pos)
         nx.draw_networkx_edge_labels(main_graph, pos=pos, edge_labels=labels, label_pos=0.83, font_size=6)
         plt.tight_layout()
-        plt.show()
+        plt.savefig(RESULTS_ROOT / f'var{index}.png')
