@@ -75,6 +75,7 @@ class Task2:
             euler_path = " -> ".join(euler_path)
             visit_colors = {1: 'green', 2: 'red'}
             visit_edges = {}
+            el = nx.get_edge_attributes(graph, 'weight')
             pos = nx.spring_layout(mgraph, seed=42)
             for k, e in enumerate(euler_circuit, start=1):
                 main_path += nx.shortest_path_length(mgraph, e[0], e[1], weight='weight')
@@ -83,6 +84,7 @@ class Task2:
                 plt.figure(figsize=(32, 20))
                 nx.draw_networkx(mgraph, pos=pos, node_size=100, node_color='gray', alpha=0.07)
                 nx.draw_networkx_labels(mgraph, pos=pos, alpha=0.8, font_size=20, font_color='black')
+                nx.draw_networkx_edge_labels(graph, pos=pos, edge_labels=el, font_size=15)
 
                 # Edges walked as of iteration i
                 euler_circuit_i = copy.deepcopy(euler_circuit[0:k])
