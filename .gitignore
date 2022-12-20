@@ -1,6 +1,7 @@
 /.idea/
 __pycache__
 **.aux
+*.out
 *.pdf
 *.log
 *.gz
