@@ -105,8 +105,8 @@ class Task2:
                 plt.axis('off')
                 plt.text(-0.8, 0.9, f'Total weight={main_path}', size=12)
                 plt.text(-0.8, 0.8, f'Path: {euler_path}', size=12)
-                os.makedirs(RESULTS_ROOT / 'img_for_gif', exist_ok=True)
-                plt.savefig(RESULTS_ROOT / 'img_for_gif' / f'img{k}.png', dpi=120, bbox_inches='tight')
+                os.makedirs(RESULTS_ROOT / f'imgforgif', exist_ok=True)
+                plt.savefig(RESULTS_ROOT / f'imgforgif' / f'img{k}.png', dpi=120, bbox_inches='tight')
                 plt.close()
 
             log.info(f'Path with minimal weight: \n{euler_path}')
@@ -127,14 +127,14 @@ class Task2:
     @staticmethod
     def make_circuit_video(s_number, fps=3):
         # Sorting filenames in order
-        filenames = os.listdir(RESULTS_ROOT / 'img_for_gif')
+        filenames = os.listdir(RESULTS_ROOT / f'imgforgif')
         filenames_sort_indices = np.argsort([int(os.path.basename(filename).split('.')[0][3:]) for filename in filenames])
         filenames = [filenames[i] for i in filenames_sort_indices]
 
         # Make gif
         with imageio.get_writer(RESULTS_ROOT / f'sample{s_number}.gif', mode='I', fps=fps) as writer:
             for filename in filenames:
-                image = imageio.imread(RESULTS_ROOT / 'img_for_gif' / filename)
+                image = imageio.imread(RESULTS_ROOT / f'imgforgif' / filename)
                 writer.append_data(image)
 
-        shutil.rmtree(RESULTS_ROOT / 'img_for_gif')
+        shutil.rmtree(RESULTS_ROOT / 'imgforgif')
