@@ -132,7 +132,7 @@ class Task2:
         filenames = [filenames[i] for i in filenames_sort_indices]
 
         # Make gif
-        with imageio.get_writer(RESULTS_ROOT / f'sample{s_number}.gif', mode='I', fps=fps) as writer:
+        with imageio.get_writer(RESULTS_ROOT / f'sample2.{s_number}.gif', mode='I', fps=fps) as writer:
             for filename in filenames:
                 image = imageio.imread(RESULTS_ROOT / f'imgforgif' / filename)
                 writer.append_data(image)
